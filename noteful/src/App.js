@@ -1,47 +1,148 @@
-import React from 'react';
-import { Router, Switch } from 'react-router-dom';
-import FolderNav from './FolderNav/FolderNav'
-import NoteNav from  './NoteNav/NoteNav'
+import React, { Component } from 'react'
+import { Route, Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import NoteListNav from './NoteListNav/NoteListNav'
+import NotePageNav from './NotePageNav/NotePageNav'
+import NoteListMain from './NoteListMain/NoteListMain'
+import NotePageMain from './NotePageMain/NotePageMain'
+import AddFolder from './AddFolder/AddFolder'
+import AddNote from './AddNote/AddNote'
+import dummyStore from './dummy-store'
+import { getNotesForFolder, findNote, findFolder } from './helper-functions'
+import './App.css'
 
-import './App.css';
-import data from './dummy-store'
 
-class App extends React.Component {
+
+
+class App extends Component {
   state = {
-    data,
-    currentFolder: '',
-    error: null
+    notes: [],
+    folders: [],
   };
 
-  openFolder = folderID =>{
-    this.setState({
-      currentFolder: folderID
-    })
+
+  
+  componentDidMount() {
+    // fake date loading from API call
+    setTimeout(() => this.setState(dummyStore), 600)
   }
 
-  render(){
-    const notes = this.state.currentFolder
-    ? this.state.data.notes.filter(note => note.folderId === this.state.currentFolder)
-    : this.state.data.notes
-
-    const folders = this.state.data.folders
-
-    console.log(notes);
+  renderNavRoutes() {
+    const { notes, folders } = this.state
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1>Noteful</h1>
-        </header>
-        <main>
-          <Switch>
-            <FolderNav openFolder={folderID => this.openFolder(folderID)} folders={ folders }/>
-          </Switch>
+      <>
+        {['/', '/folder/:folderId'].map(path =>
+          <Route
+            exact
+            key={path}
+            path={path}
+            render={routeProps =>
+              <NoteListNav
+                folders={folders}
+                notes={notes}
+                {...routeProps}
+              />
+            }
+          />
+        )}
+        <Route
+          path='/note/:noteId'
+          render={routeProps => {
+            const { noteId } = routeProps.match.params
+            const note = findNote(notes, noteId) || {}
+            const folder = findFolder(folders, note.folderId)
+            return (
+              <NotePageNav
+                {...routeProps}
+                folder={folder}
+              />
+            )
+          }}
+        />
+        <Route
+          path='/add-folder'
+          component={NotePageNav}
+        />
+        <Route
+          path='/add-note'
+          component={NotePageNav}
+        />
+      </>
+    )
+  }
 
-          <NoteNav notes={ notes }/>
+  renderMainRoutes() {
+    const { notes, folders } = this.state
+    return (
+      <>
+        {['/', '/folder/:folderId'].map(path =>
+          <Route
+            exact
+            key={path}
+            path={path}
+            render={routeProps => {
+              const { folderId } = routeProps.match.params
+              const notesForFolder = getNotesForFolder(notes, folderId)
+              return (
+                <NoteListMain
+                  {...routeProps}
+                  notes={notesForFolder}
+                />
+              )
+            }}
+          />
+        )}
+        <Route
+          path='/note/:noteId'
+          render={routeProps => {
+            const { noteId } = routeProps.match.params
+            const note = findNote(notes, noteId)
+            return (
+              <NotePageMain
+                {...routeProps}
+                note={note}
+              />
+            )
+          }}
+        />
+        <Route
+          path='/add-folder'
+          component={AddFolder}
+        />
+        <Route
+          path='/add-note'
+          render={routeProps => {
+            return (
+              <AddNote
+                {...routeProps}
+                folders={folders}
+              />
+            )
+          }}
+        />
+      </>
+    )
+  }
+
+  render() {
+    return (
+      <div className='App'>
+        <nav className='App__nav'>
+          {this.renderNavRoutes()}
+        </nav>
+        <header className='App__header'>
+          <h1>
+            <Link to='/'>Noteful</Link>
+            {' '}
+            <FontAwesomeIcon icon='check-double' />
+          </h1>
+        </header>
+        <main className='App__main'>
+          {this.renderMainRoutes()}
         </main>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

@@ -1,5 +1,7 @@
 import React from 'react';
 import './NoteNav.css';
+import { Link } from 'react-router-dom'
+
 
 import NoteItem from '../NoteItem/NoteItem'
 
@@ -10,8 +12,14 @@ export default class NoteNav extends React.Component{
     }
     render(){
         const notes = this.props.notes.map(note=>(
-            <NoteItem key={note.id} name={note.name} date={this.formatDate(note.modified)}/>
+                <li key={note.id}> 
+                    <Link to={`/note/${note.id}`}>
+                        {note.name}
+                    </Link>
+                </li>
         ))
+
+
         return(
             <div className='note-nav'>
                 <h1>Notes Here</h1>
