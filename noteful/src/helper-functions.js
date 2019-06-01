@@ -12,3 +12,25 @@ export const getNotesForFolder = (notes=[], folderId) => (
 
 export const countNotesForFolder = (notes=[], folderId) =>
   notes.filter(note => note.folderId === folderId).length
+
+export const handleAddFolder = folder => {
+  this.setState({
+    folders: [
+      ...this.state.folders, folder
+    ]
+  })
+}
+
+export const handleAddNote = note => {
+  this.setState({
+    notes: [
+      ...this.state.notes, note
+    ]
+  })
+}
+
+export const handleDeleteNote = noteId => {
+  this.setState({
+    notes: this.state.notes.folder(note => note.id !== noteId)
+  })
+}
