@@ -8,7 +8,6 @@ import NoteListMain from './NoteListMain/NoteListMain'
 import NotePageMain from './NotePageMain/NotePageMain'
 import AddFolder from './AddFolder/AddFolder'
 import AddNote from './AddNote/AddNote'
-import ApiContext from './ApiContext'
 import { getNotesForFolder,
          findNote, 
          findFolder, 
@@ -117,7 +116,7 @@ class App extends Component {
       addFolder: handleAddFolder,
       addNote: handleAddNote,
       deleteNote: handleDeleteNote
-    } 
+    }
 
     return (
       <NotefulContext.Provider value={contextValue}>
