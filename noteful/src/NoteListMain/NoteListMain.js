@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Note from '../Note/Note'
 import CircleButton from '../CircleButton/CircleButton'
 import './NoteListMain.css'
+import NoteError from '../Note/NoteError'
 
 export default function NoteListMain(props) {
   return (
@@ -11,11 +12,13 @@ export default function NoteListMain(props) {
       <ul>
         {props.notes.map(note =>
           <li key={note.id}>
-            <Note
-              id={note.id}
-              name={note.name}
-              modified={note.modified}
-            />
+            <NoteError>
+              <Note
+                id={note.id}
+                name={note.name}
+                modified={note.modified}
+              />
+            </NoteError>
           </li>
         )}
       </ul>

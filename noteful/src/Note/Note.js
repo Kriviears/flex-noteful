@@ -5,11 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import NotefulContext from '../NotefulContext'
 import config from '../config'
 import './Note.css'
+import PropTypes from 'prop-types';
 
 export default class Note extends React.Component {
   static defaultProps = {
     onDeleteNote: () => {}
   }
+
+  
+
   static contextType = NotefulContext
 
   handleClickDelete = e =>{
@@ -45,7 +49,7 @@ export default class Note extends React.Component {
             {name}
           </Link>
         </h2>
-        <button className='Note__delete' type='button'>
+        <button className='Note__delete' type='button' onClick={this.handleClickDelete} >
           <FontAwesomeIcon icon='trash-alt' />
           {' '}
           remove
@@ -63,3 +67,16 @@ export default class Note extends React.Component {
     )
   }
 }
+
+Note.defaultProps = {
+  name: '',
+  id: '',
+  modified: ''
+}
+
+Note.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  modified: PropTypes.string
+}
+
