@@ -9,10 +9,8 @@ import PropTypes from 'prop-types';
 
 export default class Note extends React.Component {
   static defaultProps = {
-    onDeleteNote: () => {}
+    onDeleteNote: () => {},
   }
-
-  
 
   static contextType = NotefulContext
 
@@ -49,7 +47,10 @@ export default class Note extends React.Component {
             {name}
           </Link>
         </h2>
-        <button className='Note__delete' type='button' onClick={this.handleClickDelete} >
+        <button 
+          className='Note__delete' 
+          type='button' 
+          onClick={this.handleClickDelete} >
           <FontAwesomeIcon icon='trash-alt' />
           {' '}
           remove

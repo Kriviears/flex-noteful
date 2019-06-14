@@ -16,6 +16,7 @@ export default class AddNote extends Component {
       modified: new Date(),
       nameValid: false,
       contentValid: false,
+      formValid: false,
       validationMessages: {
         name: '',
         content: '',
@@ -91,7 +92,7 @@ export default class AddNote extends Component {
     const fieldErrors = {...this.state.validationMessages};
     let hasError = false;
 
-    if(!this.context.folders.folderId.find(fieldValue)){
+    if(!this.context.folders.filter(folder=> folder.id === fieldValue)){
       fieldErrors.folderId = 'Please select a folder';
       hasError = true;
     } else {

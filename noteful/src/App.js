@@ -10,10 +10,7 @@ import AddFolder from './AddFolder/AddFolder'
 import AddNote from './AddNote/AddNote'
 import { getNotesForFolder,
          findNote, 
-         findFolder, 
-         handleAddFolder, 
-         handleAddNote, 
-         handleDeleteNote } from './helper-functions'
+         findFolder } from './helper-functions'
 import './App.css'
 import config from './config'
 
@@ -26,6 +23,28 @@ class App extends Component {
     folders: [],
   };
 
+  handleAddFolder = folder => {
+    this.setState({
+      folders: [
+        ...this.state.folders, folder
+      ]
+    })
+  }
+  
+  handleAddNote = note => {
+    this.setState({
+      notes: [
+        ...this.state.notes, note
+      ]
+    })
+  }
+  
+  handleDeleteNote = noteId => {
+    console.log(`deleting from ${this.state}`)
+    this.setState({
+      notes: this.state.notes.filter(note => note.id !== noteId)
+    })
+  }
 
   
   componentDidMount() {
@@ -113,9 +132,9 @@ class App extends Component {
       getNotesForFolder: getNotesForFolder,
       findNote: findNote,
       findFolder: findFolder,
-      addFolder: handleAddFolder,
-      addNote: handleAddNote,
-      deleteNote: handleDeleteNote
+      addFolder: this.handleAddFolder,
+      addNote: this.handleAddNote,
+      deleteNote: this.handleDeleteNote
     }
 
     return (

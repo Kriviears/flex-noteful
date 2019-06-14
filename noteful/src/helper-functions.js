@@ -30,6 +30,7 @@ export const handleAddNote = note => {
 }
 
 export const handleDeleteNote = noteId => {
+  console.log(`deleting from ${this.state}`)
   this.setState({
     notes: this.state.notes.folder(note => note.id !== noteId)
   })
