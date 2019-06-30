@@ -16,6 +16,7 @@ export default class AddNote extends Component {
       modified: new Date(),
       nameValid: false,
       contentValid: false,
+      folderIdValid: false,
       formValid: false,
       validationMessages: {
         name: '',
@@ -58,7 +59,7 @@ export default class AddNote extends Component {
     this.setState({
       validationMessages:fieldErrors,
       nameValid: !hasError
-    }, this.formValid())
+    }, ()=>{this.formValid()})
   }
 
   updateContent(content){
@@ -81,7 +82,7 @@ export default class AddNote extends Component {
     this.setState({
       validationMessages: fieldErrors,
       contentValid: !hasError
-    }, this.formValid())
+    }, ()=>{this.formValid()})
   }
 
   updateFolderId(folderId){
@@ -103,12 +104,13 @@ export default class AddNote extends Component {
     this.setState({
       validationMessages: fieldErrors,
       folderIdValid: !hasError
-    }, this.formValid())
+    }, ()=>{this.formValid()})
   }
 
 
   formValid(){
     const {nameValid, contentValid, folderIdValid} = this.state;
+    console.log(`name=${nameValid} content=${contentValid} folder=${folderIdValid}`)
     this.setState({
       formValid: nameValid && contentValid && folderIdValid
     })
