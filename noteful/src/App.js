@@ -63,7 +63,25 @@ class App extends Component {
       ])
     })
     .then(([notes, folders])=>{
-      this.setState({notes, folders})
+      const cNotes = [];
+      const cFolders = [];
+      notes.map(note =>(
+        cNotes.push({
+        "id": String(note.id),
+        "name": note.title,
+        "content": note.content,
+        "folderId": String(note.folder_id),
+        "modified": note.updated,
+      })));
+      folders.map(folder =>(
+        cFolders.push({
+          "id": String(folder.id),
+          "name": String(folder.title)
+        })
+      ));
+
+      this.setState({notes:cNotes, folders:cFolders})
+      //console.log(this.state);
     })
     .catch(error =>{
       console.error({ error })

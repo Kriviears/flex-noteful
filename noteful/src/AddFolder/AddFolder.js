@@ -44,7 +44,7 @@ export default class AddFolder extends Component {
     this.setState({
       validateMessages: fieldErrors,
       nameValid: !hasError
-    }, this.formValid())
+    }, ()=>{this.formValid()})
   }
 
   formValid(){
@@ -64,9 +64,9 @@ export default class AddFolder extends Component {
   static contextType = NotefulContext
 
   handleSubmit = e =>{
-    e.preventDefault()
+    
     const newFolder = {
-      name: this.state.name,
+      title: this.state.name,
       id: idGenerator()
     }
 

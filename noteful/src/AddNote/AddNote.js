@@ -117,11 +117,10 @@ export default class AddNote extends Component {
   }
 
   handleSubmit = e => {
-    e.preventDefault()
     const newNote = {
-      name: this.state.name,
+      title: this.state.name,
       content: this.state.content,
-      folderId: this.state.folderId,
+      folder_id: this.state.folderId,
       modified: this.state.modified,
     }
 
