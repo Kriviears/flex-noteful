@@ -117,6 +117,7 @@ export default class AddNote extends Component {
   }
 
   handleSubmit = e => {
+    e.preventDefault();
     const newNote = {
       title: this.state.name,
       content: this.state.content,

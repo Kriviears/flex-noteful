@@ -64,7 +64,7 @@ export default class AddFolder extends Component {
   static contextType = NotefulContext
 
   handleSubmit = e =>{
-    
+    e.preventDefault();
     const newFolder = {
       title: this.state.name,
       id: idGenerator()
