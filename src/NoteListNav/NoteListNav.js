@@ -1,11 +1,10 @@
 import React from 'react'
 import './NoteListNav.css'
 import NotefulContext from '../NotefulContext'
-import {NavLink, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import CircleButton from '../CircleButton/CircleButton'
-import { countNotesForFolder } from '../helper-functions';
 import FolderItem from '../FolderItem/FolderItem'
 
 
@@ -13,7 +12,7 @@ export default class NoteListNav extends React.Component {
   static contextType = NotefulContext;
 
   render(){
-    const { folders=[], notes=[] } = this.context
+    const { folders=[] } = this.context
     return (
       <div className='NoteListNav'>
         <ul className='NoteListNav__list'>
