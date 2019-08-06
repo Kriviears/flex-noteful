@@ -1,26 +1,57 @@
-.folder-item {
-    border: 3px solid black;
-    background-color: wheat;
-    margin: 5px;
+.Folder {
+    --folder-height: 50px;
+    background-color: #010d1e;
+    color: #cacaca;
+    height: var(--folder-height);
+    margin: 0 0 8px auto;
+    max-width: 180px;
+    padding: 8px 16px;
+    position: relative;
+    text-decoration: none;
 }
 
 .Folder__delete {
-    --folder-button-height: 32px;
-    background-color: #041a3a;
-    border: 0;
-    color: #bdbcbc;
-    float: right;
-    font-size: 12px;
-    height: var(--folder-button-height);
-    position: relative;
-    top: calc((var(--folder-button-height) + 32px) * -1);
-    transform-origin: right bottom;
-    transform: rotate(-90deg);
-    width: calc(var(--folder-height));
-  }
-  .Folder__delete:hover {
-    background-color: #bd0909;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-  }
+  --folder-button-height: 16px;
+  background-color: #041a3a;
+  border: 0;
+  color: #bdbcbc;
+  float: right;
+  font-size: 12px;
+  height: var(--folder-button-height);
+  position: relative;
+  top: calc((var(--folder-button-height)) * -1);
+  transform-origin: right bottom;
+  transform: rotate(-90deg);
+  width: calc(var(--folder-height));
+}
+.Folder__delete:hover {
+  background-color: #bd0909;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.Folder__title {
+  font-family: var(--custom-font);
+  font-size: 20px;
+  margin: 0;
+  max-width: 80%;
+  min-height: 24px;
+}
+.Folder__title a {
+  color: #cacaca;
+  display: block;
+  text-decoration: none;
+}
+.Folder__title a:hover {
+  color: #FFB72F;
+}
+
+
+
+.num-notes {
+  color: #adadad;
+  display: block;
+  float: right;
+  font-size: 10px;
+}

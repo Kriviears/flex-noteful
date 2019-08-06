@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import CircleButton from '../CircleButton/CircleButton'
 import { countNotesForFolder } from '../helper-functions';
+import FolderItem from '../FolderItem/FolderItem'
 
 
 export default class NoteListNav extends React.Component {
@@ -18,7 +19,7 @@ export default class NoteListNav extends React.Component {
         <ul className='NoteListNav__list'>
           {folders.map(folder =>
             <li key={folder.id}>
-              <NavLink
+              {/* <NavLink
                 className='NoteListNav__folder-link'
                 to={`/folder/${folder.id}`}
               >
@@ -26,7 +27,12 @@ export default class NoteListNav extends React.Component {
                   {countNotesForFolder(notes, folder.id)}
                 </span>
                 {folder.name}
-              </NavLink>
+              </NavLink> */}
+              <FolderItem
+                name={folder.name}
+                id={folder.id}
+                countNotesForFolder={this.countNotesForFolder}
+              />
             </li>
           )}
         </ul>

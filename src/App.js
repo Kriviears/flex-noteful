@@ -46,6 +46,13 @@ class App extends Component {
     })
   }
 
+  handleDeleteFolder = folderId => {
+    console.log(`deleting from ${this.state}`)
+    this.setState({
+      folders: this.state.folders.filter(folder => folder.id !== folderId)
+    })
+  }
+
   
   componentDidMount() {
     Promise.all([
@@ -152,7 +159,8 @@ class App extends Component {
       findFolder: findFolder,
       addFolder: this.handleAddFolder,
       addNote: this.handleAddNote,
-      deleteNote: this.handleDeleteNote
+      deleteNote: this.handleDeleteNote,
+      deleteFolder: this.handleDeleteFolder
     }
 
     return (

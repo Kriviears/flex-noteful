@@ -1,11 +1,17 @@
 import React from 'react'
 import './FolderItem.css'
-import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import NotefulContext from '../NotefulContext'
 import config from '../config'
+import {NavLink} from 'react-router-dom'
+import {countNotesForFolder} from '../helper-functions';
 
 export default class FolderItem extends React.Component{
+    static defaultProps = {
+      onDeleteFolder: () => {}
+    }
+
+    static contextType = NotefulContext;
 
     handleClickDelete = e =>{
         e.preventDefault()
@@ -24,7 +30,7 @@ export default class FolderItem extends React.Component{
           return res.json
         })
         .then(() => {
-          this.context.deleteNote(folderId)
+          this.context.deleteFolder(folderId)
         })
         .catch(error =>{
           console.error({ error })
@@ -33,15 +39,25 @@ export default class FolderItem extends React.Component{
 
     render(){
         return(
-            <div className='folder-item' onClick={()=>this.props.openFolder(this.props.id)}>
-                <h1>{this.props.name}</h1>
+            <div className='Folder' 
+            // onClick={()=>this.props.openFolder(this.props.id)}
+            >
+              <NavLink
+                className='Folder__title'
+                to={`/folder/${this.props.id}`}
+              >
+              {this.props.name}
+                <span className='num-notes'>
+                  {countNotesForFolder(this.context.notes, this.props.id)}
+                </span>
+              </NavLink>
                 <button 
                     className='Folder__delete' 
                     type='button' 
                     onClick={this.handleClickDelete} >
                     <FontAwesomeIcon icon='trash-alt' />
                     {' '}
-                    remove
+                    
                 </button>
             </div>
         )
