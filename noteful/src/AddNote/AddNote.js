@@ -138,8 +138,12 @@ export default class AddNote extends Component {
         return res.json()
       })
       .then(note =>{
-        this.context.addNote(note)
-        this.props.history.push(`/folder/${note.folderId}`)
+        this.context.addNote(note);
+        return note;
+      })
+      .then(note =>{
+        console.log(this.props.history);
+        this.props.history.push(`/folder/${note.folderId}`);
       })
       .catch(error => {
         console.error({ error })
