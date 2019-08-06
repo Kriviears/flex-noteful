@@ -143,7 +143,7 @@ export default class AddNote extends Component {
       })
       .then(note =>{
         console.log(this.props.history);
-        this.props.history.push(`/folder/${note.folderId}`);
+        this.props.history.push(`/folder/${note.folder_id}`);
       })
       .catch(error => {
         console.error({ error })
