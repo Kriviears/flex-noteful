@@ -124,6 +124,7 @@ export default class AddNote extends Component {
       folder_id: this.state.folderId,
       updated: this.state.modified,
     }
+    console.log(newNote);
 
     fetch(`${config.API_ENDPOINT}/notes`,{
       method: 'POST',
@@ -138,12 +139,18 @@ export default class AddNote extends Component {
         return res.json()
       })
       .then(note =>{
+        note = {
+          "id": String(note.id),
+          "name": note.title,
+          "content": note.content,
+          "folderId": String(note.folder_id),
+          "modified": note.updated,
+        };
         this.context.addNote(note);
         return note;
       })
       .then(note =>{
-        console.log(this.props.history);
-        this.props.history.push(`/folder/${note.folder_id}`);
+        this.props.history.push(`/folder/${note.folderId}`);
       })
       .catch(error => {
         console.error({ error })

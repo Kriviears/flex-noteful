@@ -3,3 +3,24 @@
     background-color: wheat;
     margin: 5px;
 }
+
+.Folder__delete {
+    --folder-button-height: 32px;
+    background-color: #041a3a;
+    border: 0;
+    color: #bdbcbc;
+    float: right;
+    font-size: 12px;
+    height: var(--folder-button-height);
+    position: relative;
+    top: calc((var(--folder-button-height) + 32px) * -1);
+    transform-origin: right bottom;
+    transform: rotate(-90deg);
+    width: calc(var(--folder-height));
+  }
+  .Folder__delete:hover {
+    background-color: #bd0909;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+  }

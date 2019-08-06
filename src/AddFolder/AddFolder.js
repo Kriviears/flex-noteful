@@ -84,6 +84,10 @@ export default class AddFolder extends Component {
     })
     .then(folder =>{
       console.log(folder)
+      folder = {
+        "id": String(folder.id),
+        "name": folder.title,
+      };
       this.context.addFolder(folder)
       this.props.history.push(`/`)
     })
