@@ -122,7 +122,7 @@ export default class AddNote extends Component {
       title: this.state.name,
       content: this.state.content,
       folder_id: this.state.folderId,
-      modified: this.state.modified,
+      updated: this.state.modified,
     }
 
     fetch(`${config.API_ENDPOINT}/notes`,{
